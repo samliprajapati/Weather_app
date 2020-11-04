@@ -1,101 +1,96 @@
-import React from "react";
-import { Table, Tag, Space } from "antd";
+import React, { useEffect } from "react";
+import { Table, Tag, Space, Input } from "antd";
+import Papa from "papaparse";
+import { UserOutlined } from "@ant-design/icons";
+
 const columns = [
   {
-    title: "State",
-    dataIndex: "name",
-    key: "name",
-    render: (text) => <a>{text}</a>,
+    title: "",
+    width: "5%",
+  },
+  {
+    title: "State / UT",
+    dataIndex: "State",
   },
   {
     title: "Confirmed",
-    dataIndex: "name",
-    key: "name",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Recovered",
-    dataIndex: "name",
-    key: "name",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Deaths",
-    dataIndex: "name",
-    key: "name",
-    render: (text) => <a>{text}</a>,
+    dataIndex: "Confirmed",
   },
   {
     title: "Active",
-    dataIndex: "name",
-    key: "name",
-    render: (text) => <a>{text}</a>,
+    dataIndex: "Active",
   },
   {
-    title: "Last_?Update_Time",
-    dataIndex: "name",
-    key: "name",
-    render: (text) => <a>{text}</a>,
+    title: "Recovered",
+    dataIndex: "Recovered",
   },
   {
-    title: "State_code",
-    dataIndex: "name",
-    key: "name",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Delta_Confirmed",
-    dataIndex: "name",
-    key: "name",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Delta_Recovered",
-    dataIndex: "name",
-    key: "name",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Delta_Deaths",
-    dataIndex: "name",
-    key: "name",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "State_Notes",
-    dataIndex: "name",
-    key: "name",
-    render: (text) => <a>{text}</a>,
+    title: "Deceased",
+    dataIndex: "Deaths",
   },
 ];
 
-const data = [
-  {
-    key: "1",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    tags: ["nice", "developer"],
-  },
-  {
-    key: "2",
-    name: "Jim Green",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    tags: ["loser"],
-  },
-  {
-    key: "3",
-    name: "Joe Black",
-    age: 32,
-    address: "Sidney No. 1 Lake Park",
-    tags: ["cool", "teacher"],
-  },
-];
 function Home() {
+  const [rows, setRows] = React.useState([]);
+  const [filterContactValue, setFilterContactValue] = React.useState("");
+
+  React.useEffect(() => {
+    Papa.parse("/state.csv", {
+      download: true,
+      complete: (data) => {
+        setRows(data.data);
+      },
+    });
+  }, []);
+
+  var objs = rows.map(function (x) {
+    return {
+      State: x[0],
+      Confirmed: x[1],
+      Recovered: x[2],
+      Deaths: x[3],
+      Active: x[4],
+    };
+  });
+  const filteredContact = React.useMemo(() => {
+    console.log(objs);
+    return filterContactValue === ""
+      ? objs
+      : objs.filter((objs) => {
+          debugger;
+
+          return objs.State.toLowerCase().includes(
+            filterContactValue.toLowerCase()
+          );
+        });
+  }, [filterContactValue, objs]);
+  console.log(filteredContact);
+
+  function handleChange(e) {
+    debugger;
+    setFilterContactValue(e.target.value);
+  }
+  console.log(filterContactValue);
+  console.log(objs);
   return (
     <div>
-      <Table columns={columns} dataSource={data} />
+      <div
+        style={{
+          border: "1px solid rgb(0, 191, 255)",
+          width: "50%",
+          float: "right",
+          margin: "10px",
+        }}
+      >
+        <Input.Search
+          // prefix={<UserOutlined />}
+          placeholder="input search text"
+          onChange={handleChange}
+          style={{ width: "100%" }}
+        />
+      </div>
+
+      <Table columns={columns} dataSource={filteredContact}></Table>
     </div>
   );
 }

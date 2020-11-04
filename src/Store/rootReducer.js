@@ -1,12 +1,12 @@
 import { combineReducers } from "redux";
-// import { mainReducer } from "../Container/MainReducer";
+import { authReducer } from "../Components/Auth/AuthReducer";
 
 /**
  *  All of application reducers import goes here...
  */
 
 const appReducer = combineReducers({
-  //   main: mainReducer,
+  auth: authReducer,
 });
 
 const rootReducer = (state, action) => {

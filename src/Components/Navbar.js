@@ -1,7 +1,11 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-
-export default class Navbar extends Component {
+import { Link, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { logout } from "./Auth/AuthAction";
+import { createBrowserHistory } from "history";
+const history = createBrowserHistory();
+class Navbar extends Component {
   render() {
     return (
       <div
@@ -39,9 +43,18 @@ export default class Navbar extends Component {
             color: "white",
           }}
         >
-          <div style={{ marginRight: "30px" }}>Logout</div>
+          <div
+            style={{ marginRight: "30px", cursor: "pointer" }}
+            onClick={() => this.props.logout(history)}
+          >
+            Logout
+          </div>
         </div>
       </div>
     );
   }
 }
+const mapStateToProps = ({ auth }) => ({ loggedIn: auth.loggedIn });
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ logout }, dispatch);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navbar));

@@ -1,8 +1,7 @@
 import React from "react";
 import "./auth.css";
 import signinimage from "../../Assets/images/signin-image.webp";
-import { Input } from "antd";
-import { UserOutlined, KeyOutlined } from "@ant-design/icons";
+
 import LoginForm from "./LoginForm";
 import { Link, withRouter } from "react-router-dom";
 
@@ -12,7 +11,7 @@ function Login() {
       <div className="main">
         <div className="left">
           <div className="image">
-            <img src={signinimage} />
+            <img src={signinimage} alt="loginimage" />
             <Link to="/signup">
               {" "}
               <div style={{ marginTop: "10px" }}>Create an account</div>

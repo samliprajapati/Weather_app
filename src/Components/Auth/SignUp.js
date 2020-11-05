@@ -18,7 +18,7 @@ function SignUp() {
         <div className="left">
           <div className="image">
             {" "}
-            <img src={signinimage} />
+            <img src={signinimage} alt="img" />
             <Link to="/signin">
               {" "}
               <div style={{ marginTop: "10px" }}>I am already member</div>

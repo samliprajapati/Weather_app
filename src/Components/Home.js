@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
-import { Table, Tag, Space, Input } from "antd";
+import React from "react";
+import { Table, Input } from "antd";
 import Papa from "papaparse";
-import { UserOutlined } from "@ant-design/icons";
 
 const columns = [
   {

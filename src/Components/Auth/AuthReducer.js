@@ -2,11 +2,11 @@ import * as types from "./AuthActionType";
 const initialState = {
   logging: false,
   loginError: false,
-  //   userDetails: sessionStorage.getItem("userDetails")
-  //     ? JSON.parse(sessionStorage.getItem("userDetails"))
-  //     : [],
+
   userDetails: [],
   loggedIn: null,
+
+  registeredInd: false,
 
   registering: false,
   registeringError: false,
@@ -20,24 +20,9 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         logging: false,
         loggedIn: action.payload,
-        // loggedIn: state.userDetails.map((item) => {
-        //   debugger;
-        //   console.log(item);
-
-        //   if (
-        //     item.emailAddress === action.payload.emailAddress &&
-        //     item.password === action.payload.password
-        //   ) {
-        //     debugger;
-        //     return item;
-        //   } else {
-        //     debugger;
-        //     return null;
-        //   }
-        // }),
       };
-    // case types.LOGIN_FAILURE:
-    //   return { ...state, logging: false, loginError: true };
+    case types.LOGIN_FAILURE:
+      return { ...state, logging: false, loginError: true };
 
     case types.REGISTER_REQUEST:
       return { ...state, registering: true };
@@ -45,7 +30,8 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         registering: false,
-        userDetails: [action.payload],
+        registeredInd: true,
+        userDetails: [...state.userDetails, action.payload],
       };
     case types.REGISTER_FAILURE:
       return { ...state, registering: false, registeringError: true };
@@ -56,5 +42,4 @@ export const authReducer = (state = initialState, action) => {
     default:
       return state;
   }
-  return state;
 };

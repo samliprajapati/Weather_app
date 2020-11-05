@@ -3,27 +3,21 @@ import { Input, Button, Form, message, Checkbox } from "antd";
 import { Formik } from "formik";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { register } from "./AuthAction";
-import { createBrowserHistory } from "history";
 import { KeyOutlined, MailOutlined, UserOutlined } from "@ant-design/icons";
-const history = createBrowserHistory();
 
 function SignupForm(props) {
   function onChangeCheckbox(e) {
     console.log(`checked = ${e.target.checked}`);
   }
-  function handleLoginCallback(status) {
-    console.log(status);
-
-    if (status == "success") {
+  function handleLoginCallback() {
+    if (this.props.registeredInd) {
       debugger;
       props.history.push("/");
       message.success("Register Successful.");
     } else {
-      message.error(
-        " Email id and Password not match . Please try again later"
-      );
+      message.error("some Error occured");
     }
   }
   return (
@@ -36,7 +30,8 @@ function SignupForm(props) {
       }}
       onSubmit={(values) => {
         console.log(values);
-        props.register(values, handleLoginCallback);
+        props.register(values);
+        handleLoginCallback();
       }}
     >
       {({
@@ -104,7 +99,7 @@ function SignupForm(props) {
   );
 }
 
-const mapStateToProps = ({}) => ({});
+const mapStateToProps = ({ auth }) => ({ registeredInd: auth.registeredInd });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators({ register }, dispatch);
 export default withRouter(

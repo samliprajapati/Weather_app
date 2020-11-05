@@ -3,12 +3,10 @@ import { Input, Button, Form, message, Checkbox } from "antd";
 import { Formik } from "formik";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { login } from "./AuthAction";
-import { createBrowserHistory } from "history";
-import { authReducer } from "./AuthReducer";
+
 import { KeyOutlined, MailOutlined } from "@ant-design/icons";
-const history = createBrowserHistory();
 
 function LoginForm(props) {
   function onChangeCheckbox(e) {

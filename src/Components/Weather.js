@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import backgroundImage from "../Assets/images/weather.jpg";
-import { Input, Select } from "antd";
+import { Select } from "antd";
 import "./Weather.css";
 import axios from "axios";
 import Papa from "papaparse";

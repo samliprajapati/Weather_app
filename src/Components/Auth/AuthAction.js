@@ -1,10 +1,6 @@
 import * as types from "./AuthActionType";
-import axios from "axios";
-import { message } from "antd";
-import { createBrowserHistory } from "history";
-const history = createBrowserHistory();
 
-const mockData = [{}];
+import { message } from "antd";
 
 export const login = (data) => (dispatch, getState) => {
   const { userDetails } = getState("auth").auth;
@@ -30,20 +26,22 @@ export const login = (data) => (dispatch, getState) => {
   });
 };
 
-export const register = (data, cb) => (dispatch) => {
+export const register = (data) => (dispatch) => {
+  console.log(data);
   dispatch({
     type: types.REGISTER_REQUEST,
   });
-
-  dispatch({
-    type: types.REGISTER_SUCCESS,
-    payload: data,
-  });
-  cb && cb("success");
-  dispatch({
-    type: types.REGISTER_FAILURE,
-    // payload: err,
-  });
+  if (data.emailAddress && data.password) {
+    dispatch({
+      type: types.REGISTER_SUCCESS,
+      payload: [data],
+    });
+  } else {
+    dispatch({
+      type: types.REGISTER_FAILURE,
+      // payload: err,
+    });
+  }
 };
 
 export const logout = (history) => (dispatch) => {

@@ -21,11 +21,13 @@ function Weather() {
     });
   }, []);
 
-  var stateName = state.map(function (x) {
-    return {
-      State: x[0],
-    };
-  });
+  var stateName = state
+    .filter((item, i) => i !== 0 && i !== 1)
+    .map(function (x) {
+      return {
+        State: x[0],
+      };
+    });
 
   useEffect(() => {
     axios

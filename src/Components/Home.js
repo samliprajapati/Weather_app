@@ -43,15 +43,17 @@ function Home() {
     });
   }, []);
 
-  var objs = rows.map(function (x) {
-    return {
-      State: x[0],
-      Confirmed: x[1],
-      Recovered: x[2],
-      Deaths: x[3],
-      Active: x[4],
-    };
-  });
+  var objs = rows
+    .filter((item, i) => i !== 0 && i !== 1)
+    .map(function (x) {
+      return {
+        State: x[0],
+        Confirmed: x[1],
+        Recovered: x[2],
+        Deaths: x[3],
+        Active: x[4],
+      };
+    });
   const filteredContact = React.useMemo(() => {
     console.log(objs);
     return filterContactValue === ""

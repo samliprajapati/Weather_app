@@ -4,7 +4,7 @@ import signinimage from "../../Assets/images/signin-image.webp";
 import { Input } from "antd";
 import { UserOutlined, KeyOutlined } from "@ant-design/icons";
 import LoginForm from "./LoginForm";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 function Login() {
   return (
@@ -12,13 +12,18 @@ function Login() {
       <div className="main">
         <div className="left">
           <div className="image">
-            {" "}
             <img src={signinimage} />
+            <Link to="/signup">
+              {" "}
+              <div style={{ marginTop: "10px" }}>Create an account</div>
+            </Link>{" "}
           </div>
         </div>
         <div className="right">
           <div className="header">Sign In</div>
-          <LoginForm />
+          <div className="form_wrapper">
+            <LoginForm />
+          </div>
         </div>
       </div>
     </div>

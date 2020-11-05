@@ -7,6 +7,7 @@ import { Link, withRouter } from "react-router-dom";
 import { login } from "./AuthAction";
 import { createBrowserHistory } from "history";
 import { authReducer } from "./AuthReducer";
+import { KeyOutlined, MailOutlined } from "@ant-design/icons";
 const history = createBrowserHistory();
 
 function LoginForm(props) {
@@ -40,30 +41,24 @@ function LoginForm(props) {
         /* and other goodies */
       }) => (
         <form onSubmit={handleSubmit}>
-          <p>Email</p>
           <Form.Item
             name="emailAddress"
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.emailAddress}
           >
-            <Input />
+            <Input placeholder="Your Email" prefix={<MailOutlined />} />
           </Form.Item>
-          <p>Password</p>
+
+          <br />
           <Form.Item
             name="password"
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.password}
           >
-            <Input.Password />
+            <Input.Password prefix={<KeyOutlined />} placeholder="Password" />
           </Form.Item>
-          <div>
-            Don't have an account ?
-            <Link to="/signUp" style={{ textAlign: "center", fontSize: 14 }}>
-              Register
-            </Link>
-          </div>
 
           <br />
           <Button type="primary" htmlType="submit">

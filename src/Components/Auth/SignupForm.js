@@ -1,11 +1,12 @@
 import React from "react";
-import { Input, Button, Form, message } from "antd";
+import { Input, Button, Form, message, Checkbox } from "antd";
 import { Formik } from "formik";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Link, withRouter } from "react-router-dom";
 import { register } from "./AuthAction";
 import { createBrowserHistory } from "history";
+import { KeyOutlined, MailOutlined, UserOutlined } from "@ant-design/icons";
 const history = createBrowserHistory();
 
 function SignupForm(props) {
@@ -24,8 +25,14 @@ function SignupForm(props) {
   }
   return (
     <Formik
-      initialValues={{ emailAddress: "", password: "" }}
-      onSubmit={(values, { setSubmitting }) => {
+      initialValues={{
+        userName: "",
+        emailAddress: "",
+        password: "",
+        Confirmpassword: "",
+      }}
+      onSubmit={(values) => {
+        console.log(values);
         props.register(values, handleLoginCallback);
       }}
     >
@@ -40,26 +47,49 @@ function SignupForm(props) {
         /* and other goodies */
       }) => (
         <form onSubmit={handleSubmit}>
-          <p>Email</p>
+          <Form.Item
+            name="userName"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.userName}
+          >
+            <Input placeholder="Your Name" prefix={<UserOutlined />} />
+          </Form.Item>
+          <br />
           <Form.Item
             name="emailAddress"
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.emailAddress}
           >
-            <Input />
+            <Input placeholder="Your Email" prefix={<MailOutlined />} />
           </Form.Item>
-          <p>Password</p>
+          <br />
           <Form.Item
             name="password"
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.password}
           >
-            <Input.Password />
+            <Input.Password prefix={<KeyOutlined />} placeholder="Password" />
+          </Form.Item>
+          <br />
+          <Form.Item
+            name="Confirmpassword"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.password}
+          >
+            <Input.Password
+              prefix={<KeyOutlined />}
+              placeholder="Repeat your password"
+            />
           </Form.Item>
 
           <br />
+          <Form.Item name="remember" valuePropName="checked">
+            <Checkbox>I agree all statements in Terms of services</Checkbox>
+          </Form.Item>
           <Button type="primary" htmlType="submit">
             Register
           </Button>

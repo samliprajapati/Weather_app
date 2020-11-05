@@ -9,7 +9,7 @@ export const login = (data) => (dispatch, getState) => {
   dispatch({
     type: types.LOGIN_REQUEST,
   });
-  userDetails.map((item) => {
+  userDetails.forEach((item) => {
     if (
       item.emailAddress === data.emailAddress &&
       item.password === data.password

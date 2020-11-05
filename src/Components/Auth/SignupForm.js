@@ -12,7 +12,7 @@ function SignupForm(props) {
     console.log(`checked = ${e.target.checked}`);
   }
   function handleLoginCallback() {
-    if (this.props.registeredInd) {
+    if (props.registeredInd) {
       debugger;
       props.history.push("/");
       message.success("Register Successful.");

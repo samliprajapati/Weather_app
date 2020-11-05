@@ -31,7 +31,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         registering: false,
         registeredInd: true,
-        userDetails: [action.payload],
+        userDetails: action.payload,
       };
     case types.REGISTER_FAILURE:
       return { ...state, registering: false, registeringError: true };

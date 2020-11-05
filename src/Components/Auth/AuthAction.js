@@ -32,9 +32,10 @@ export const register = (data) => (dispatch) => {
     type: types.REGISTER_REQUEST,
   });
   if (data.emailAddress && data.password) {
+    debugger;
     dispatch({
       type: types.REGISTER_SUCCESS,
-      payload: [data],
+      payload: data,
     });
   } else {
     dispatch({

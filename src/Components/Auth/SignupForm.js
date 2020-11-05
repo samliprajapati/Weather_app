@@ -14,7 +14,7 @@ function SignupForm(props) {
   function handleLoginCallback() {
     if (props.registeredInd) {
       debugger;
-      props.history.push("/");
+      props.history.push("/signin");
       message.success("Register Successful.");
     } else {
       message.error("some Error occured");

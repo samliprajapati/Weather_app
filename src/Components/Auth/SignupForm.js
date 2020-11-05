@@ -10,6 +10,9 @@ import { KeyOutlined, MailOutlined, UserOutlined } from "@ant-design/icons";
 const history = createBrowserHistory();
 
 function SignupForm(props) {
+  function onChangeCheckbox(e) {
+    console.log(`checked = ${e.target.checked}`);
+  }
   function handleLoginCallback(status) {
     console.log(status);
 
@@ -87,8 +90,10 @@ function SignupForm(props) {
           </Form.Item>
 
           <br />
-          <Form.Item name="remember" valuePropName="checked">
-            <Checkbox>I agree all statements in Terms of services</Checkbox>
+          <Form.Item>
+            <Checkbox onChange={onChangeCheckbox}>
+              I agree all statements in Terms of services
+            </Checkbox>
           </Form.Item>
           <Button type="primary" htmlType="submit">
             Register

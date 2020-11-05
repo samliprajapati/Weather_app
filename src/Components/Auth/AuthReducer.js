@@ -19,22 +19,25 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         logging: false,
-        loggedIn: state.userDetails.map((item) => {
-          debugger;
-          console.log(item);
+        loggedIn: action.payload,
+        // loggedIn: state.userDetails.map((item) => {
+        //   debugger;
+        //   console.log(item);
 
-          if (
-            item.emailAddress === action.payload.emailAddress &&
-            item.password === action.payload.password
-          ) {
-            return item;
-          } else {
-            return null;
-          }
-        }),
+        //   if (
+        //     item.emailAddress === action.payload.emailAddress &&
+        //     item.password === action.payload.password
+        //   ) {
+        //     debugger;
+        //     return item;
+        //   } else {
+        //     debugger;
+        //     return null;
+        //   }
+        // }),
       };
-    case types.LOGIN_FAILURE:
-      return { ...state, logging: false, loginError: true };
+    // case types.LOGIN_FAILURE:
+    //   return { ...state, logging: false, loginError: true };
 
     case types.REGISTER_REQUEST:
       return { ...state, registering: true };

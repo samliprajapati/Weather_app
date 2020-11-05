@@ -25,7 +25,7 @@ class Navbar extends Component {
             color: "white",
           }}
         >
-          <Link to="/home" style={{ color: "white" }}>
+          <Link to="/" style={{ color: "white" }}>
             {" "}
             <div style={{ marginLeft: "30px" }}>Home</div>
           </Link>

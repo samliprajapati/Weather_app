@@ -6,20 +6,27 @@ const history = createBrowserHistory();
 
 const mockData = [{}];
 
-export const login = (data, cb) => (dispatch) => {
+export const login = (data) => (dispatch, getState) => {
+  const { userDetails } = getState("auth").auth;
+  console.log(userDetails);
+  console.log(data);
   dispatch({
     type: types.LOGIN_REQUEST,
   });
-
-  //   sessionStorage.setItem("userDetails", JSON.stringify(res.data));
-  dispatch({
-    type: types.LOGIN_SUCCESS,
-    payload: data,
-  });
-  cb();
-  dispatch({
-    type: types.LOGIN_FAILURE,
-    // payload: err,
+  userDetails.map((item) => {
+    if (
+      item.emailAddress === data.emailAddress &&
+      item.password === data.password
+    ) {
+      dispatch({
+        type: types.LOGIN_SUCCESS,
+        payload: data,
+      });
+    } else {
+      dispatch({
+        type: types.LOGIN_FAILURE,
+      });
+    }
   });
 };
 

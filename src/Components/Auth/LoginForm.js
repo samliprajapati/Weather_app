@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, Button, Form, message } from "antd";
+import { Input, Button, Form, message, Checkbox } from "antd";
 import { Formik } from "formik";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -11,9 +11,12 @@ import { KeyOutlined, MailOutlined } from "@ant-design/icons";
 const history = createBrowserHistory();
 
 function LoginForm(props) {
-  function handleLoginCallback(status) {
+  function onChangeCheckbox(e) {
+    console.log(`checked = ${e.target.checked}`);
+  }
+  function handleLoginCallback() {
+    console.log(props.loggedIn);
     if (props.loggedIn !== null) {
-      debugger;
       props.history.push("/");
       message.success("Login Successful.");
     } else {
@@ -27,7 +30,8 @@ function LoginForm(props) {
       initialValues={{ emailAddress: "", password: "" }}
       onSubmit={(values, { setSubmitting }) => {
         console.log(values);
-        props.login(values, handleLoginCallback);
+        props.login(values);
+        handleLoginCallback();
       }}
     >
       {({
@@ -58,6 +62,10 @@ function LoginForm(props) {
             value={values.password}
           >
             <Input.Password prefix={<KeyOutlined />} placeholder="Password" />
+          </Form.Item>
+          <br />
+          <Form.Item>
+            <Checkbox onChange={onChangeCheckbox}>Remember me</Checkbox>
           </Form.Item>
 
           <br />

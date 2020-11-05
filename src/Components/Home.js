@@ -35,6 +35,7 @@ function Home() {
   const [filterContactValue, setFilterContactValue] = React.useState("");
 
   React.useEffect(() => {
+    debugger;
     Papa.parse("/state.csv", {
       download: true,
       complete: (data) => {

@@ -18,9 +18,6 @@ function LoginForm(props) {
       props.history.push("/home");
       message.success("Login Successful.");
     } else {
-      message.error(
-        " Email id and Password not match . Please try again later"
-      );
     }
   }
   return (

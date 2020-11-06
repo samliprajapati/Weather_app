@@ -1,7 +1,6 @@
 import React from "react";
 import "./auth.css";
 import signinimage from "../../Assets/images/signin-image.webp";
-import { createBrowserHistory } from "history";
 import LoginForm from "./LoginForm";
 import { Link, withRouter } from "react-router-dom";
 

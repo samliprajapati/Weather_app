@@ -2,7 +2,8 @@ import * as types from "./AuthActionType";
 
 import { message } from "antd";
 
-export const login = (data) => (dispatch, getState) => {
+export const login = (data, cb) => (dispatch, getState) => {
+  debugger;
   const { userDetails } = getState("auth").auth;
   console.log(userDetails);
   console.log(data);
@@ -10,6 +11,7 @@ export const login = (data) => (dispatch, getState) => {
     type: types.LOGIN_REQUEST,
   });
   userDetails.forEach((item) => {
+    debugger;
     if (
       item.emailAddress === data.emailAddress &&
       item.password === data.password
@@ -18,10 +20,12 @@ export const login = (data) => (dispatch, getState) => {
         type: types.LOGIN_SUCCESS,
         payload: data,
       });
+      cb && cb("success");
     } else {
       dispatch({
         type: types.LOGIN_FAILURE,
       });
+      cb && cb("failure");
     }
   });
 };

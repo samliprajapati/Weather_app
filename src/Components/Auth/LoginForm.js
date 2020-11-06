@@ -12,12 +12,14 @@ function LoginForm(props) {
   function onChangeCheckbox(e) {
     console.log(`checked = ${e.target.checked}`);
   }
-  function handleLoginCallback() {
+  function handleLoginCallback(status) {
+    debugger;
     console.log(props.loggedIn);
-    if (props.loggedIn !== null) {
+    if (status === "success") {
       props.history.push("/home");
       message.success("Login Successful.");
     } else {
+      message.error("Email Address and password doesnot match.please register");
     }
   }
   return (
@@ -25,8 +27,7 @@ function LoginForm(props) {
       initialValues={{ emailAddress: "", password: "" }}
       onSubmit={(values, { setSubmitting }) => {
         console.log(values);
-        props.login(values);
-        handleLoginCallback();
+        props.login(values, handleLoginCallback);
       }}
     >
       {({

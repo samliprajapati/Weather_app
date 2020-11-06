@@ -15,7 +15,7 @@ function LoginForm(props) {
   function handleLoginCallback() {
     console.log(props.loggedIn);
     if (props.loggedIn !== null) {
-      props.history.push("/");
+      props.history.push("/home");
       message.success("Login Successful.");
     } else {
       message.error(

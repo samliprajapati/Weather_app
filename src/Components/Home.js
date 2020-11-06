@@ -1,6 +1,7 @@
 import React from "react";
 import { Table, Input } from "antd";
 import Papa from "papaparse";
+import { withRouter } from "react-router-dom";
 
 const columns = [
   {
@@ -96,4 +97,4 @@ function Home() {
     </div>
   );
 }
-export default Home;
+export default withRouter(Home);

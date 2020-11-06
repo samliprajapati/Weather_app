@@ -3,7 +3,7 @@ const initialState = {
   logging: false,
   loginError: false,
 
-  userDetails: [],
+  userDetails: [{ emailAddress: "Orange123@gmail.com", password: "Orange123" }],
   loggedIn: null,
 
   registeredInd: false,
@@ -31,10 +31,14 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         registering: false,
         registeredInd: true,
-        userDetails: action.payload,
+        userDetails: [...state.userDetails, action.payload],
       };
     case types.REGISTER_FAILURE:
-      return { ...state, registering: false, registeringError: true };
+      return {
+        ...state,
+        registering: false,
+        registeringError: true,
+      };
 
     case types.LOGOUT:
       return { ...state, userDetails: [] };

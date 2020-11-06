@@ -26,13 +26,12 @@ export const login = (data) => (dispatch, getState) => {
   });
 };
 
-export const register = (data) => (dispatch) => {
+export const register = (data, history) => (dispatch) => {
   console.log(data);
   dispatch({
     type: types.REGISTER_REQUEST,
   });
   if (data.emailAddress && data.password) {
-    debugger;
     dispatch({
       type: types.REGISTER_SUCCESS,
       payload: data,
@@ -40,7 +39,7 @@ export const register = (data) => (dispatch) => {
   } else {
     dispatch({
       type: types.REGISTER_FAILURE,
-      // payload: err,
+      // payload: data,
     });
   }
 };

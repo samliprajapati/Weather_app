@@ -2,7 +2,7 @@ import React from "react";
 import "./auth.css";
 import signinimage from "../../Assets/images/signup-image.webp";
 import SignupForm from "./SignupForm";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 function SignUp() {
   return (
@@ -30,4 +30,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default withRouter(SignUp);

@@ -11,15 +11,16 @@ function SignupForm(props) {
   function onChangeCheckbox(e) {
     console.log(`checked = ${e.target.checked}`);
   }
-  function handleLoginCallback() {
+  function handlesignupCallback() {
+    console.log(props.registeredInd);
     if (props.registeredInd) {
-      debugger;
       props.history.push("/signin");
       message.success("Register Successful.");
     } else {
-      message.error("some Error occured");
+      message.error(" ");
     }
   }
+
   return (
     <Formik
       initialValues={{
@@ -31,7 +32,7 @@ function SignupForm(props) {
       onSubmit={(values) => {
         console.log(values);
         props.register(values);
-        handleLoginCallback();
+        handlesignupCallback();
       }}
     >
       {({
@@ -102,6 +103,7 @@ function SignupForm(props) {
 const mapStateToProps = ({ auth }) => ({ registeredInd: auth.registeredInd });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators({ register }, dispatch);
+
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(SignupForm)
 );

@@ -23,6 +23,4 @@ class PrivateRoute extends React.Component {
 
 const mapStateToProps = ({ auth }) => ({ loggedIn: auth.loggedIn });
 const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch);
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(PrivateRoute)
-);
+export default connect(mapStateToProps, mapDispatchToProps)(PrivateRoute);

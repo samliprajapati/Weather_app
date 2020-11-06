@@ -19,7 +19,7 @@ function LoginForm(props) {
       props.history.push("/home");
       message.success("Login Successful.");
     } else {
-      message.error("Email Address and password doesnot match.please register");
+      message.error("Email Address and password doesnot match.");
     }
   }
   return (

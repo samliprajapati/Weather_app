@@ -14,17 +14,17 @@ function LoginForm(props) {
   }
   function handleLoginCallback(status) {
     debugger;
-    console.log(props.loggedIn);
+
     if (status === "success") {
-      props.history.push("/home");
       message.success("Login Successful.");
+      props.history.push("/home");
     } else {
       message.error("Email Address and password doesnot match.");
     }
   }
   return (
     <Formik
-      initialValues={{ emailAddress: "", password: "" }}
+      initialValues={{ emailId: "", password: "" }}
       onSubmit={(values, { setSubmitting }) => {
         console.log(values);
         props.login(values, handleLoginCallback);
@@ -42,10 +42,10 @@ function LoginForm(props) {
       }) => (
         <form onSubmit={handleSubmit}>
           <Form.Item
-            name="emailAddress"
+            name="emailId"
             onChange={handleChange}
             onBlur={handleBlur}
-            value={values.emailAddress}
+            value={values.emailId}
           >
             <Input placeholder="Your Email" prefix={<MailOutlined />} />
           </Form.Item>

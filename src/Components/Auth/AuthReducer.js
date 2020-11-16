@@ -3,9 +3,9 @@ const initialState = {
   logging: false,
   loginError: false,
 
-  userDetails: [{ emailAddress: "Orange123@gmail.com", password: "Orange123" }],
+  userDetails: [{ emailId: "Orange123@gmail.com", password: "Orange123" }],
   loggedIn: null,
-
+  loggedInStatus: false,
   registeredInd: false,
 
   registering: false,
@@ -18,7 +18,7 @@ export const authReducer = (state = initialState, action) => {
     case types.LOGIN_SUCCESS:
       return {
         ...state,
-        logging: false,
+        loggedInStatus: true,
         loggedIn: action.payload,
       };
     case types.LOGIN_FAILURE:
@@ -41,7 +41,7 @@ export const authReducer = (state = initialState, action) => {
       };
 
     case types.LOGOUT:
-      return { ...state, loggedIn: null };
+      return { ...state, loggedIn: null, loggedInStatus: false };
 
     default:
       return state;

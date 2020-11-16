@@ -10,42 +10,47 @@ export const login = (data, cb) => (dispatch, getState) => {
   dispatch({
     type: types.LOGIN_REQUEST,
   });
+  let loggedInd = false;
 
   userDetails.forEach((item) => {
     debugger;
-    if (
-      item.emailAddress === data.emailAddress &&
-      item.password === data.password
-    ) {
-      dispatch({
-        type: types.LOGIN_SUCCESS,
-        payload: data,
-      });
-      cb && cb("success");
-    } else {
-      dispatch({
-        type: types.LOGIN_FAILURE,
-      });
-      cb && cb("failure");
+    if (item.emailId === data.emailId && item.password === data.password) {
+      loggedInd = true;
     }
   });
+  console.log(loggedInd);
+
+  if (loggedInd) {
+    dispatch({
+      type: types.LOGIN_SUCCESS,
+      payload: data,
+    });
+    cb && cb("success");
+  } else {
+    dispatch({
+      type: types.LOGIN_FAILURE,
+    });
+    cb && cb("failure");
+  }
 };
 
-export const register = (data, history) => (dispatch) => {
-  console.log(data);
+export const register = (data, cb) => (dispatch) => {
+  console.log("Register Data...........", data);
   dispatch({
     type: types.REGISTER_REQUEST,
   });
-  if (data.emailAddress && data.password) {
+  if (data.emailId && data.password) {
     dispatch({
       type: types.REGISTER_SUCCESS,
       payload: data,
     });
+    cb && cb("Success");
   } else {
     dispatch({
       type: types.REGISTER_FAILURE,
       // payload: data,
     });
+    cb && cb("Failure");
   }
 };
 

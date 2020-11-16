@@ -11,13 +11,13 @@ function SignupForm(props) {
   function onChangeCheckbox(e) {
     console.log(`checked = ${e.target.checked}`);
   }
-  function handlesignupCallback() {
+  function handlesignupCallback(status) {
     console.log(props.registeredInd);
-    if (props.registeredInd) {
+    if (status === "Success") {
       props.history.push("/signin");
       message.success("Register Successful.");
     } else {
-      message.error(" ");
+      message.error("Please Fill All fields and Try Again");
     }
   }
 
@@ -25,14 +25,13 @@ function SignupForm(props) {
     <Formik
       initialValues={{
         userName: "",
-        emailAddress: "",
+        emailId: "",
         password: "",
         Confirmpassword: "",
       }}
       onSubmit={(values) => {
         console.log(values);
-        props.register(values);
-        handlesignupCallback();
+        props.register(values, handlesignupCallback);
       }}
     >
       {({
@@ -56,10 +55,10 @@ function SignupForm(props) {
           </Form.Item>
           <br />
           <Form.Item
-            name="emailAddress"
+            name="emailId"
             onChange={handleChange}
             onBlur={handleBlur}
-            value={values.emailAddress}
+            value={values.emailId}
           >
             <Input placeholder="Your Email" prefix={<MailOutlined />} />
           </Form.Item>
